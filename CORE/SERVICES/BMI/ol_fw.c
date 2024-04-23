@@ -3754,3 +3754,6 @@ void ol_pktlog_init(void *hif_sc)
 		pr_err("%s: pktlogmod_init failed ret:%d\n", __func__, ret);
 }
 #endif
+#ifdef CONFIG_ANDROID
+MODULE_IMPORT_NS(VFS_internal_I_am_really_a_filesystem_and_am_NOT_a_driver);
+#endif
