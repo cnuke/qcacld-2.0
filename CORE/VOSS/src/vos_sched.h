@@ -112,6 +112,7 @@
 */
 #define VOSS_MAX_TLSHIM_PKT 4000
 
+struct txrx_tl_shim_ctx;
 typedef void (*vos_tlshim_cb) (struct txrx_tl_shim_ctx *tl_shim,
                                adf_nbuf_t buf_list, u_int16_t staid);
 #endif
