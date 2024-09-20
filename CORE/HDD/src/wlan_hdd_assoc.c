@@ -6461,7 +6461,7 @@ static int __iw_get_ap_address(struct net_device *dev,
     }
     else
     {
-        memset(wrqu->ap_addr.sa_data,0,sizeof(wrqu->ap_addr.sa_data));
+        memset(wrqu->ap_addr.sa_data,0,ETH_ALEN);
     }
     EXIT();
     return 0;
