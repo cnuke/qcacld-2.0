@@ -649,9 +649,15 @@ struct hmac_sha1_result {
     int err;
 };
 
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 3, 0))
+static void hmac_sha1_complete(void *req, int err)
+{
+    struct hmac_sha1_result *r = req;
+#else
 static void hmac_sha1_complete(struct crypto_async_request *req, int err)
 {
     struct hmac_sha1_result *r = req->data;
+#endif
     if (err == -EINPROGRESS)
         return;
     r->err = err;
@@ -822,9 +828,15 @@ struct hmac_md5_result {
     int err;
 };
 
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 3, 0))
+static void hmac_md5_complete(void *req, int err)
+{
+    struct hmac_md5_result *r = req;
+#else
 static void hmac_md5_complete(struct crypto_async_request *req, int err)
 {
     struct hmac_md5_result *r = req->data;
+#endif
     if (err == -EINPROGRESS)
             return;
     r->err = err;
