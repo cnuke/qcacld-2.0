@@ -370,12 +370,16 @@ static int pktlog_sysctl_register(struct ol_softc *scn)
 	set_ctl_name(0, CTL_AUTO);
 	pl_info_lnx->sysctls[0].procname = PKTLOG_PROC_DIR;
 	pl_info_lnx->sysctls[0].mode = PKTLOG_PROCSYS_DIR_PERM;
+#if (LINUX_VERSION_CODE < KERNEL_VERSION(6, 4, 0))
 	pl_info_lnx->sysctls[0].child = &pl_info_lnx->sysctls[2];
+#endif
 	/* [1] is NULL terminator */
 	set_ctl_name(2, CTL_AUTO);
 	pl_info_lnx->sysctls[2].procname = proc_name;
 	pl_info_lnx->sysctls[2].mode = PKTLOG_PROCSYS_DIR_PERM;
+#if (LINUX_VERSION_CODE < KERNEL_VERSION(6, 4, 0))
 	pl_info_lnx->sysctls[2].child = &pl_info_lnx->sysctls[4];
+#endif
 	/* [3] is NULL terminator */
 	set_ctl_name(4, CTL_AUTO);
 	pl_info_lnx->sysctls[4].procname = "enable";
@@ -443,8 +447,12 @@ static int pktlog_sysctl_register(struct ol_softc *scn)
 	/* [13] is NULL terminator */
 
 	/* and register everything */
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 4, 0))
+	pl_info_lnx->sysctl_header =
+		register_sysctl(proc_name, pl_info_lnx->sysctls);
+
 	/* register_sysctl_table changed from 2.6.21 onwards */
-#if (LINUX_VERSION_CODE > KERNEL_VERSION(2,6,20))
+#elif (LINUX_VERSION_CODE > KERNEL_VERSION(2,6,20))
 	pl_info_lnx->sysctl_header =
 			register_sysctl_table(pl_info_lnx->sysctls);
 #else
