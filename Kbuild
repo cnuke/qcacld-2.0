@@ -1904,6 +1904,10 @@ ifeq ($(call cc-option-yn, -Wno-address),y)
 EXTRA_CFLAGS += -Wno-address
 endif
 
+ifeq ($(call cc-option-yn, -Wno-enum-conversion),y)
+EXTRA_CFLAGS += -Wno-enum-conversion
+endif
+
 # If the module name is not "wlan", then the define MULTI_IF_NAME to be the
 # same a the QCA CHIP name. The host driver will then append MULTI_IF_NAME to
 # any string that must be unique for all instances of the driver on the system.
