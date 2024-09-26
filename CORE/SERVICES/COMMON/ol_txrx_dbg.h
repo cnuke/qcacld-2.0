@@ -106,7 +106,7 @@ void ol_txrx_fw_stats_cfg(
     u_int8_t cfg_stats_type,
     u_int32_t cfg_val);
 
-int ol_txrx_fw_stats_get(
+A_STATUS ol_txrx_fw_stats_get(
     ol_txrx_vdev_handle vdev,
     struct ol_txrx_stats_req *req,
     bool response_expected);

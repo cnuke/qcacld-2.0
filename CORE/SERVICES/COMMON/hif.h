@@ -416,7 +416,7 @@ HIFSetMboxSleep(HIF_DEVICE *device, bool sleep, bool wait, bool cache);
  * and to set OS driver callbacks (i.e. insertion/removal) to the HIF layer
  *
  */
-int HIFInit(OSDRV_CALLBACKS *callbacks);
+A_STATUS HIFInit(OSDRV_CALLBACKS *callbacks);
 
 /* This API claims the HIF device and provides a context for handling removal.
  * The device removal callback is only called when the OSDRV layer claims
@@ -426,7 +426,7 @@ void HIFClaimDevice(HIF_DEVICE *device, void *claimedContext);
 void HIFReleaseDevice(HIF_DEVICE *device);
 
 /* This API allows the HTC layer to attach to the HIF device */
-int HIFAttachHTC(HIF_DEVICE *device, HTC_CALLBACKS *callbacks);
+A_STATUS HIFAttachHTC(HIF_DEVICE *device, HTC_CALLBACKS *callbacks);
 /* This API detaches the HTC layer from the HIF device */
 void     HIFDetachHTC(HIF_DEVICE *device);
 
@@ -450,7 +450,7 @@ HIFSyncRead(HIF_DEVICE *device,
  * length - Amount of data to be transmitted or received.
  * request - Characterizes the attributes of the command.
  */
-int
+A_STATUS
 HIFReadWrite(HIF_DEVICE    *device,
              u_int32_t      address,
              u_char        *buffer,
@@ -478,7 +478,7 @@ void HIFMaskInterrupt(HIF_DEVICE *device);
 
 void HIFUnMaskInterrupt(HIF_DEVICE *device);
 
-int
+A_STATUS
 HIFConfigureDevice(HIF_DEVICE *device, HIF_DEVICE_CONFIG_OPCODE opcode,
                    void *config, u_int32_t configLen);
 
@@ -486,7 +486,7 @@ HIFConfigureDevice(HIF_DEVICE *device, HIF_DEVICE_CONFIG_OPCODE opcode,
  * This API wait for the remaining MBOX messages to be drained
  * This should be moved to HTC AR6K layer
  */
-int hifWaitForPendingRecv(HIF_DEVICE *device);
+A_STATUS hifWaitForPendingRecv(HIF_DEVICE *device);
 
 /****************************************************************/
 /* BMI and Diag window abstraction                              */
@@ -499,7 +499,7 @@ int hifWaitForPendingRecv(HIF_DEVICE *device);
 
     /* API to handle HIF-specific BMI message exchanges, this API is synchronous
      * and only allowed to be called from a context that can block (sleep) */
-int HIFExchangeBMIMsg(HIF_DEVICE *device,
+A_STATUS HIFExchangeBMIMsg(HIF_DEVICE *device,
                            u_int8_t    *pSendMessage,
                            u_int32_t   Length,
                            u_int8_t    *pResponseMessage,
@@ -518,8 +518,8 @@ int HIFExchangeBMIMsg(HIF_DEVICE *device,
      *
      * HIFDiagReadMem reads an arbitrary length of arbitrarily aligned memory.
      */
-int HIFDiagReadAccess(HIF_DEVICE *hifDevice, A_UINT32 address, A_UINT32 *data);
-int HIFDiagReadMem(HIF_DEVICE *hif_device, A_UINT32 address, A_UINT8 *data, int nbytes);
+A_STATUS HIFDiagReadAccess(HIF_DEVICE *hifDevice, A_UINT32 address, A_UINT32 *data);
+A_STATUS HIFDiagReadMem(HIF_DEVICE *hif_device, A_UINT32 address, A_UINT8 *data, int nbytes);
 void HIFDumpTargetMemory(HIF_DEVICE *hif_device, void *ramdump_base,
                            u_int32_t address, u_int32_t size);
     /*
@@ -532,8 +532,8 @@ void HIFDumpTargetMemory(HIF_DEVICE *hif_device, void *ramdump_base,
      *
      * HIFDiagWriteMem writes an arbitrary length of arbitrarily aligned memory.
      */
-int HIFDiagWriteAccess(HIF_DEVICE *hifDevice, A_UINT32 address, A_UINT32 data);
-int HIFDiagWriteMem(HIF_DEVICE *hif_device, A_UINT32 address, A_UINT8 *data, int nbytes);
+A_STATUS HIFDiagWriteAccess(HIF_DEVICE *hifDevice, A_UINT32 address, A_UINT32 data);
+A_STATUS HIFDiagWriteMem(HIF_DEVICE *hif_device, A_UINT32 address, A_UINT8 *data, int nbytes);
 #if defined(HIF_PCI) && ! defined(A_SIMOS_DEVHOST)
 /*
  * This API allows the Host to access Target registers of a given

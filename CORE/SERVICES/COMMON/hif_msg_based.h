@@ -101,7 +101,7 @@ int HIFSend(HIF_DEVICE *hifDevice, u_int8_t PipeID,
  * @param[out]:
  * @return: Status of the send operation.
  */
-int HIFSend_head(HIF_DEVICE *hifDevice, u_int8_t PipeID,
+A_STATUS HIFSend_head(HIF_DEVICE *hifDevice, u_int8_t PipeID,
 		 unsigned int transferID, unsigned int nbytes, adf_nbuf_t wbuf);
 
 /**

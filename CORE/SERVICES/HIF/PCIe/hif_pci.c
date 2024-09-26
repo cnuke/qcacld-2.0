@@ -268,7 +268,7 @@ WAR_PCI_WRITE32(char *addr, u32 offset, u32 value)
     }
 }
 
-int HIFInit(OSDRV_CALLBACKS *callbacks)
+A_STATUS HIFInit(OSDRV_CALLBACKS *callbacks)
 {
     AR_DEBUG_PRINTF(ATH_DEBUG_TRC, ("+%s\n",__FUNCTION__));
 
@@ -915,7 +915,7 @@ hif_msg_callbacks_install(HIF_DEVICE *hif_device)
     AR_DEBUG_PRINTF(ATH_DEBUG_TRC, ("-%s\n",__FUNCTION__));
 }
 
-int
+A_STATUS
 HIFConfigureDevice(HIF_DEVICE *hif_device, HIF_DEVICE_CONFIG_OPCODE opcode,
                             void *config, u_int32_t configLen)
 {
@@ -2014,7 +2014,7 @@ HIF_BMI_recv_data(struct CE_handle *copyeng, void *ce_context, void *transfer_co
 
 /* Timeout for BMI message exchange */
 #define HIF_EXCHANGE_BMI_MSG_TIMEOUT      6000
-int
+A_STATUS
 HIFExchangeBMIMsg(HIF_DEVICE *hif_device,
                   A_UINT8    *bmi_request,
                   u_int32_t   request_length,
