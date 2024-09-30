@@ -18631,7 +18631,7 @@ static int __init hdd_module_init ( void)
 static int __init hdd_module_init ( void)
 {
    /* Driver initialization is delayed to fwpath_changed_handler */
-   return 0;
+   return kickstart_driver(true, false);
 }
 #endif /* #ifdef MODULE */
 #endif /* #ifndef FEATURE_LARGE_PREALLOC*/

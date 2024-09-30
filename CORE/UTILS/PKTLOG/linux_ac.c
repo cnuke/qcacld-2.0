@@ -346,6 +346,7 @@ static int pktlog_sysctl_register(struct ol_softc *scn)
 	struct ath_pktlog_info_lnx *pl_info_lnx;
 	char *proc_name;
 
+#if 0
 	if (pl_dev) {
 		pl_info_lnx = PL_INFO_LNX(pl_dev->pl_info);
 		proc_name = pl_dev->name;
@@ -463,8 +464,9 @@ static int pktlog_sysctl_register(struct ol_softc *scn)
 		printk("%s: failed to register sysctls!\n", proc_name);
 		return -1;
 	}
-
 	return 0;
+#endif
+	return -1;
 }
 
 /*

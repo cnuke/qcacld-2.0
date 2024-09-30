@@ -71,7 +71,7 @@ struct bus_request_record bus_request_record_buf[BUS_REQ_RECORD_SIZE];
  * buffer is DMA'able and will bug-check otherwise (i.e. buffers on the stack).
  * virt_addr_valid check fails on stack memory.
  */
-#define BUFFER_NEEDS_BOUNCE(buffer)  (((unsigned long)(buffer) & 0x3) || !virt_addr_valid((buffer)))
+#define BUFFER_NEEDS_BOUNCE(buffer)  (TRUE)
 #else
 #define BUFFER_NEEDS_BOUNCE(buffer)   (FALSE)
 #endif

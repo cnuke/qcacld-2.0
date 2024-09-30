@@ -94,6 +94,8 @@ static inline void vos_pm_wake_lock_init(vos_wake_lock_t *lock,
 {
 	vos_mem_zero(lock, sizeof(*lock));
 	lock->priv = wakeup_source_register(lock->lock.dev, name);
+	if (lock->priv == NULL)
+		return;
 
 	lock->lock = *(lock->priv);
 }
